@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:botanix/core/colors/App_colors.dart';
-import 'package:botanix/features/home/home.dart';
 import 'package:botanix/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
