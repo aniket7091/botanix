@@ -89,7 +89,6 @@ class _OfferCardViewState extends State<OfferCardView> {
               ],
             ),
 
-
             /// for the plant type and claim button
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,12 +96,18 @@ class _OfferCardViewState extends State<OfferCardView> {
                 Text(
                   "${widget.plantType} | T&C Applied",
                   style: GoogleFonts.abhayaLibre(
-                    fontSize: Responsive.fontSize(context,13),
+                    fontSize: Responsive.fontSize(context, 13),
                     color: AppColors.backgroundLight,
                   ),
                 ),
 
-                ElevatedButton(onPressed: widget.onTap, child: Text("Claim")),
+                ElevatedButton(
+                  onPressed: widget.onTap,
+                  child: Text(
+                    "Claim",
+                    style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
+                  ),
+                ),
               ],
             ),
           ],

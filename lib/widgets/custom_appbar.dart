@@ -15,6 +15,7 @@ class CustomAppbar extends StatefulWidget {
 class _CustomAppbarState extends State<CustomAppbar> {
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Column(
       children: [
         /// Appbar
@@ -28,7 +29,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
           ),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.lightGreen[700],
+              color: AppColors.accentGreen,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
@@ -79,7 +80,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
                           borderRadius: BorderRadius.circular(10.0),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.lightGreen,
+                              color: AppColors.darkGreen,
                               blurRadius: 1,
                               offset: Offset(0.1, 0.1),
                               spreadRadius: 0.5,
@@ -89,6 +90,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
                         child: ImageIcon(
                           AssetImage("assets/icons/bell.png"),
                           color: AppColors.backgroundLight,
+                          size: 20,
                         ),
                       ),
                     ],
@@ -100,7 +102,12 @@ class _CustomAppbarState extends State<CustomAppbar> {
                   SizedBox(
                     height: Responsive.height(context, 6),
                     child: SearchBar(
-                      leading: ImageIcon(AssetImage("assets/icons/search.png")),
+                      leading: ImageIcon(
+                        AssetImage("assets/icons/search.png"),
+                        color: isDarkMode
+                            ? AppColors.backgroundLight
+                            : AppColors.textPrimary,
+                      ),
                       hintText: "Search .....",
                       hintStyle: WidgetStateProperty.all(
                         GoogleFonts.abhayaLibre(

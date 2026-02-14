@@ -8,6 +8,9 @@ class AppColors {
   static const Color backgroundLight = Color(0xFFF5FBF7);
   static const Color cardBackground = Colors.white;
   static const Color softMint = Color(0xFFE8F6EF);
+  static  Color GreenCardButton = Colors.green.shade600;
+  static  Color GreenCard = Colors.green.shade300;
+
 
   static const Color textPrimary = Color(0xFF1E1E1E);
   static const Color textSecondary = Color(0xFF6B6B6B);
