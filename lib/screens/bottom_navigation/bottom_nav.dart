@@ -2,6 +2,8 @@ import 'package:botanix/core/colors/App_colors.dart';
 import 'package:botanix/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/home/home.dart';
+
 class BottomNavScreen extends StatefulWidget {
   const BottomNavScreen({super.key});
 
@@ -13,11 +15,11 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   int currentIndex = 0;
 
   final List<Widget> pages = const [
-    // HomeScreen(),
+    HomeScreen(),
     // CartScreen(),
     // FavoriteScreen(),
     // ProfileScreen(),
-    Center(child: Text("Home")),
+    //Center(child: Text("Home")),
     Center(child: Text("Likes")),
     Center(child: Text("Carts")),
     Center(child: Text("Profile")),

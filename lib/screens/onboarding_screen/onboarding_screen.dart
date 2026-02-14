@@ -1,4 +1,3 @@
-import 'package:botanix/features/home/home.dart';
 import 'package:botanix/screens/bottom_navigation/bottom_nav.dart';
 import 'package:botanix/utils/responsive.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +33,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     if (currentIndex == onboardingData.length - 1) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => HomeScreen()),
+        MaterialPageRoute(builder: (_) => BottomNavScreen()),
       );
     } else {
       _controller.nextPage(
