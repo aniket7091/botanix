@@ -3,6 +3,7 @@ import 'package:botanix/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/home/home.dart';
+import '../../features/product_Details/product_detail_screen.dart';
 
 class BottomNavScreen extends StatefulWidget {
   const BottomNavScreen({super.key});
@@ -17,6 +18,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   final List<Widget> pages = const [
     HomeScreen(),
     // CartScreen(),
+    // PlantDetailScreen(),
     // FavoriteScreen(),
     // ProfileScreen(),
     //Center(child: Text("Home")),

@@ -2,7 +2,7 @@ import 'package:botanix/core/colors/App_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class PlantCard extends StatelessWidget {
+class PlantCard extends StatefulWidget {
   final String tittle;
   final String desc;
   final String plantSize;
@@ -21,101 +21,123 @@ class PlantCard extends StatelessWidget {
   });
 
   @override
+  State<PlantCard> createState() => _PlantCardState();
+}
+
+class _PlantCardState extends State<PlantCard> {
+  bool isLike = false;
+  @override
   Widget build(BuildContext context) {
-    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    return Center(
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          // Card Background
-          Container(
-            width: 260,
-            height: 350,
-            padding: EdgeInsets.fromLTRB(16, 70, 16, 16),
-            decoration: BoxDecoration(
-              color: Colors.green.shade300,
-              borderRadius: BorderRadius.circular(25),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 100),
+    return GestureDetector(
+      onTap: widget.onTap, // Card tap = Detail Screen
+      child: Center(
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            /// Card Background
+            Container(
+              width: 260,
+              height: 330,
+              padding: const EdgeInsets.fromLTRB(16, 70, 16, 16),
+              decoration: BoxDecoration(
+                color: Colors.green.shade300,
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 100),
 
-                ///plant tittle
-                Text(
-                  tittle,
-                  style: GoogleFonts.roboto(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                  maxLines: 1,
-                ),
-                SizedBox(height: 8),
-
-                /// plant description
-                Text(
-                  desc,
-                  style: GoogleFonts.roboto(color: Colors.white70),
-                  maxLines: 3,
-                ),
-
-                SizedBox(height: 15),
-
-                /// plant size
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      plantSize,
-                      style: GoogleFonts.roboto(color: Colors.white),
+                  /// Title
+                  Text(
+                    widget.tittle.isNotEmpty ? widget.tittle : "No Title",
+                    maxLines: 1,
+                    style: GoogleFonts.roboto(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
+                  ),
 
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AppColors.bottomNavDark,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                  const SizedBox(height: 8),
 
-                      ///plant price
-                      child: Text(
-                        "₹ ${prince}",
+                  /// Description
+                  Text(
+                    widget.desc.isNotEmpty ? widget.desc : "No Description",
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.roboto(color: Colors.white70),
+                  ),
+
+                  const Spacer(), // Keeps bottom fixed
+                  /// Size + Price Bottom Fixed
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        widget.plantSize.isNotEmpty
+                            ? widget.plantSize
+                            : "Medium",
                         style: GoogleFonts.roboto(color: Colors.white),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.bottomNavDark,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          "₹ ${widget.prince}",
+                          style: GoogleFonts.roboto(color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
 
-          /// Plant Image
-          Positioned(
-            left: 40,
-            top: -30,
-            child: Image.asset(image, height: 180, fit: BoxFit.contain),
-          ),
+            /// Plant Image
+            Positioned(
+              left: 40,
+              top: -30,
+              child: Image.asset(
+                widget.image,
+                height: 180,
+                fit: BoxFit.contain,
+              ),
+            ),
 
-          /// Favorite Icon
-          Positioned(
-            top: 15,
-            right: 15,
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
+            /// Favourite Button (Separate Tap)
+            Positioned(
+              top: 15,
+              right: 15,
               child: GestureDetector(
-                onTap: onTap,
-                child: ImageIcon(
-                  AssetImage('assets/icons/heart.png'),
-                  color: AppColors.accentGreen,
+                onTap: () {
+                  setState(() {
+                    isLike = !isLike;
+                  });
+                },
+                behavior: HitTestBehavior.opaque,
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: isLike
+                      ? ImageIcon(
+                          const AssetImage('assets/icons/heart_filled.png'),
+                          color: AppColors.accentGreen,
+                        )
+                      : ImageIcon(
+                          const AssetImage('assets/icons/heart.png'),
+                          color: AppColors.accentGreen,
+                        ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
